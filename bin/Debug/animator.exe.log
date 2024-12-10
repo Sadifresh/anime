@@ -1,0 +1,50 @@
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Рубцов Александр\animator\bin\Debug\animator.exe, файл: c:\codeblocks\codeblocks\mingw\include\txlib.h, строка: 13751, функция: bool {anonymous}::TX::txTransparentBlt(HDC, double, double, double, double, HDC, double, double, COLORREF),
+
+Сообщение: Параметр "sourceImage" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#1: TXLib [Ver: 00173a, Rev: 173, Date: 2024-06-23 22:37:05 +0400], Instance: 0x005062FC (32-bit), Flags: CMdRe0, Thread: 0x1EC4 (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool {anonymous}::TX::txTransparentBlt(HDC, double, double, double, double, HDC, double, double, COLORREF) at c:\codeblocks\codeblocks\mingw\include\txlib.h:13751:
+
+  13749: 
+  13750: $1  if (_TX_HDC_FAILED (destImage))   return false;
+=>13751: $   if (_TX_HDC_FAILED (sourceImage)) return false;
+  13752: 
+  13753:     // Это автоматическое определение размеров картинки (точнее, HDC источника - source) с помощью txGetExtent().
+
+# 1 in int main() at C:\Рубцов Александр\animator\main.cpp:16:
+
+     14:             txBegin();
+     15: 
+=>   16:             txTransparentBlt(txDC(), 400, 300, 67, 100,image, 0, 0, TX_WHITE );
+     17: 
+     18:             txEnd();
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 173, Date: 2024-06-23 22:37:05 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\codeblocks\codeblocks\mingw\include\txlib.h
+Compiled:	Dec 10 2024 07:49:39, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Dec 10 2024 07:49:57
+
+Run file:	C:\Рубцов Александр\animator\bin\Debug\animator.exe
+Directory:	C:\Рубцов Александр\animator
+
+--------------------------------------------------
