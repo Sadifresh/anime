@@ -1,36 +1,72 @@
 #include "TXLib.h"
 
+struct Mario
+{
+    int x;
+    int vx;
+    HDC image;
+    HDC image_r;
+    HDC image_l;
+    int n_cadr;
+
+
+    void draw()
+    {
+        txTransparentBlt(txDC(), x, 300, 67, 100, image, 67*n_cadr, 0, TX_WHITE );
+    }
+
+    void animation()
+    {
+        n_cadr += 1;
+        if(n_cadr>=12)
+        {
+            n_cadr = 0;
+        }
+    }
+
+};
+
 int main()
 {
 txCreateWindow (800, 600);
 txTextCursor (false);
 
-HDC image = txLoadImage("mario.bmp");
-int n_cadr = 0;
-int x = 100
-
+Mario mario1 = {100, 10, txLoadImage("mario_r.bmp"), txLoadImage("mario_r.bmp"), txLoadImage("mario_l.bmp"), 0};
+Mario mario2 = {100, 10, txLoadImage("mario_r.bmp"), txLoadImage("mario_r.bmp"), txLoadImage("mario_l.bmp"), 0};
+Mario mario3 = {100, 10, txLoadImage("mario_r.bmp"), txLoadImage("mario_r.bmp"), txLoadImage("mario_l.bmp"), 0};
+Mario mario4 = {100, 10, txLoadImage("mario_r.bmp"), txLoadImage("mario_r.bmp"), txLoadImage("mario_l.bmp"), 0};
+Mario mario5 = {100, 10, txLoadImage("mario_r.bmp"), txLoadImage("mario_r.bmp"), txLoadImage("mario_l.bmp"), 0};
 
     while(!GetAsyncKeyState(VK_ESCAPE))
     {
         txClear();
         txBegin();
 
-        txTransparentBlt(txDC(), 400, 300, 67, 100, image, 67*n_cadr, 0, TX_WHITE );
-        
-        if(!GetAsyncKeyState(VK_RIGHT))
-        n_cadr += 1;
-        if(n_cadr>=12)
+        mario1.draw();
+        mario1.animation();
+
+        mario1.x += mario1.vx;
+
+        if(mario1.x>700)
+
         {
-            x
-            n_cadr = 0;
+            mario1.vx = -mario1.vx;
+            mario1.image = mario1.image_l;
         }
+
+        if(mario1.x<100)
+        {
+            mario1.vx = -mario1.vx;
+            mario1.image = mario1.image_r;
+        }
+
 
         txEnd();
         txSleep(50);
 
     }
 
-txDeleteDC(image);
+txDeleteDC(mario1.image);
 txDisableAutoPause();
 return 0;
 }
